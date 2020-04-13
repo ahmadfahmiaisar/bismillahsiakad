@@ -8,8 +8,11 @@ class User extends CI_Controller {
 
     public function getuser(){
         $getuser = $this->db->get('user')->result_array();
+        // $coba = $this->db->get('dosen')->result_array();
         $output['pesan'] = "data semua user";
         $output['user'] = $getuser;
+        // $output['dosen'] = $coba;
+
         echo json_encode($output);
     }
 
