@@ -9,7 +9,18 @@ class Krs extends CI_Controller {
     public function getkrs() {
         // $this->db->select('User.nomer_induk, User.nama, User.prodi, Krs.id_krs, Matkul.kode_matkul, Matkul.nama_matkul, Matkul.semester, Matkul.total_sks, Kelas.rombel, Dosen.namadosen, Matkul.keterangan, Kelas.ruang, Kelas.hari, Kelas.jam');
         $this->db->select('*');
+        $this->db->from('krs');
+        $this->db->join('matkul', 'krs.fk_matkul = matkul.id_matkul', 'inner');
+        $this->db->join('user', 'krs.fk_user = user.id_user', 'inner');
+        $query['krs'] = $this->db->get()->result_array();
+        echo json_encode($query);
+    }
+
+
+    public function getkrsbyid($iduser='') {
+        $this->db->select('*');
         $this->db->from('Krs');
+        $this->db->like('fk_user', $iduser);
         $this->db->join('User', 'Krs.fk_user = User.id_user', 'inner');
         $this->db->join('Matkul', 'Krs.fk_matkul = Matkul.id_matkul', 'inner');
         $query['krs'] = $this->db->get()->result_array();
@@ -18,11 +29,16 @@ class Krs extends CI_Controller {
 
 
     public function getmatkul() {
-        $this->db->select('Matkul.id_matkul, Kelas.id_kelas, Dosen.id_dosen, Matkul.kode_matkul, Matkul.nama_matkul, Matkul.semester, Matkul.total_sks, Kelas.rombel, Dosen.namadosen, Matkul.keterangan, Kelas.ruang, Kelas.hari, Kelas.jam');
-        $this->db->from('User, Matkul, Dosen, Kelas');
+        /* $this->db->select('*');
+        $this->db->from('Matkul, Dosen, Kelas');
         $this->db->where('Matkul.fk_dosen = Dosen.id_dosen');
-        $this->db->where('Matkul.fk_kelas = Kelas.id_kelas');
-        $query = $this->db->get()->result_array();
+        $this->db->where('Matkul.fk_kelas = Kelas.id_kelas'); */
+
+        $this->db->select('*');
+        $this->db->from('matkul');
+        $this->db->join('kelas', 'matkul.fk_kelas = kelas.id_kelas');
+        $this->db->join('dosen', 'matkul.fk_dosen = dosen.id_dosen');
+        $query['matkul'] = $this->db->get()->result_array();
         echo json_encode($query);
     }
 
@@ -52,7 +68,22 @@ class Krs extends CI_Controller {
         echo "selesai";
     }
 
-    public function editkrs() {
-        
+    //gak ada edit, karena nanti behaviornya delete dulu yang di table krs lalu getmatkul untuk pilih kembali krs yang mau di pilih lagi
+    public function deletekrs($idkrs='') {
+        // $idkrs = $_POST['id_krs'];
+
+        $this->db->like('id_krs', $idkrs);
+        $this->db->delete('krs');
+    }
+
+    public function deletesomekrs() {
+        $data = file_get_contents("php://input");
+        $temp = json_decode($data);
+        foreach($temp as $t) {
+            $input = array();
+            $input['id_krs'] = $t->id_krs;
+            $this->db->delete('krs', $input);
+        }
+        echo "okeh";
     }
 }
