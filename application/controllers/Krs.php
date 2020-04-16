@@ -12,6 +12,7 @@ class Krs extends CI_Controller {
         $this->db->from('krs');
         $this->db->join('matkul', 'krs.fk_matkul = matkul.id_matkul', 'inner');
         $this->db->join('user', 'krs.fk_user = user.id_user', 'inner');
+        $this->db->join('kelas', 'matkul.fk_kelas = kelas.id_kelas', 'inner');
         $query['krs'] = $this->db->get()->result_array();
         echo json_encode($query);
     }
@@ -19,10 +20,11 @@ class Krs extends CI_Controller {
 
     public function getkrsbyid($iduser='') {
         $this->db->select('*');
-        $this->db->from('Krs');
-        $this->db->like('fk_user', $iduser);
-        $this->db->join('User', 'Krs.fk_user = User.id_user', 'inner');
-        $this->db->join('Matkul', 'Krs.fk_matkul = Matkul.id_matkul', 'inner');
+        $this->db->from('krs');
+        $this->db->where('fk_user', $iduser);
+        $this->db->join('user', 'krs.fk_user = user.id_user', 'inner');
+        $this->db->join('matkul', 'krs.fk_matkul = matkul.id_matkul', 'inner');
+        $this->db->join('kelas', 'matkul.fk_kelas = kelas.id_kelas', 'inner');
         $query['krs'] = $this->db->get()->result_array();
         echo json_encode($query);
     }
@@ -72,7 +74,7 @@ class Krs extends CI_Controller {
     public function deletekrs($idkrs='') {
         // $idkrs = $_POST['id_krs'];
 
-        $this->db->like('id_krs', $idkrs);
+        $this->db->where()('id_krs', $idkrs);
         $this->db->delete('krs');
     }
 

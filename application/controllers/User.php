@@ -16,8 +16,8 @@ class User extends CI_Controller {
         echo json_encode($output);
     }
 
-    public function getuserbyid($id=''){
-        $this->db->where('id_user', $id);
+    public function getuserbyusername($username=''){
+        $this->db->where('username', $username);
         $getuserbyid = $this->db->get('user')->row_array();
         echo json_encode($getuserbyid);
     }
