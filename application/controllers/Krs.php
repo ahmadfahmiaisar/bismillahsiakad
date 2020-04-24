@@ -62,10 +62,15 @@ class Krs extends CI_Controller {
         $temp = json_decode($data);
         foreach($temp as $t){
             $input = array();
+            $input['id_krs'] = $t->id_krs;
             $input['fk_user'] = $t->fk_user;
             $input['fk_matkul'] = $t->fk_matkul;
             $input['tahun'] = $t->tahun;
+
+            $inputs['fk_krs'] = $t->id_krs;
+
             $this->db->insert('krs', $input);
+            $this->db->insert('dhs', $inputs);
         }
         echo "selesai";
     }
