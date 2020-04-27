@@ -6,6 +6,16 @@ class User extends CI_Controller {
        $this->load->view('welcome');
     }
 
+    public function loginsiakad() {
+        $username = $_POST['username'];
+        $password = $_POST['password'];
+        
+
+        $user = array('username' => $username, 'password' => $password);
+        $login = $this->db->get('user', $user)->row_array();
+        echo json_encode($login);
+    }
+
     public function getuser(){
         $getuser = $this->db->get('user')->result_array();
         // $coba = $this->db->get('dosen')->result_array();
