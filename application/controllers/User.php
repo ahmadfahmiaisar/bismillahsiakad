@@ -12,6 +12,8 @@ class User extends CI_Controller {
         
 
         $user = array('username' => $username, 'password' => $password);
+        $this->db->where('username', $username);
+        $this->db->where('password', $password);
         $login = $this->db->get('user', $user)->row_array();
         echo json_encode($login);
     }
