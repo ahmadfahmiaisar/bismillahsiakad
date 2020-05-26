@@ -18,13 +18,13 @@ class Krs extends CI_Controller {
     }
 
 
-    public function getkrsbyid($iduser='') {
+    public function getkrsbyid($username='') {
         $this->db->select('*');
         $this->db->from('krs');
-        $this->db->where('fk_user', $iduser);
         $this->db->join('user', 'krs.fk_user = user.id_user', 'inner');
         $this->db->join('matkul', 'krs.fk_matkul = matkul.id_matkul', 'inner');
         $this->db->join('kelas', 'matkul.fk_kelas = kelas.id_kelas', 'inner');
+        $this->db->where('username', $username);
         $query['krs'] = $this->db->get()->result_array();
         echo json_encode($query);
     }
