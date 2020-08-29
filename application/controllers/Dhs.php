@@ -16,13 +16,13 @@ class Dhs extends CI_Controller {
         echo json_encode($query);
     }
 
-    public function getdhsbyid($iduser='') {
+    public function getdhsbyusername($username='') {
         $this->db->select('*');
         $this->db->from('dhs');
-        $this->db->where('fk_user', $iduser);
         $this->db->join('Krs', 'dhs.fk_krs = krs.id_krs', 'inner');
         $this->db->join('user', 'krs.fk_user = user.id_user', 'inner');
         $this->db->join('matkul', 'krs.fk_matkul = matkul.id_matkul', 'inner');
+        $this->db->where('username', $username);
         $query['dhs'] = $this->db->get()->result_array();
         echo json_encode($query);
     }
