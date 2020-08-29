@@ -18,7 +18,7 @@ class Krs extends CI_Controller {
     }
 
 
-    public function getkrsbyid($username='') {
+    public function getkrsbyusername($username='') {
         $this->db->select('*');
         $this->db->from('krs');
         $this->db->join('user', 'krs.fk_user = user.id_user', 'inner');
