@@ -61,15 +61,15 @@ class Krs extends CI_Controller {
         $data = file_get_contents("php://input");
         $temp = json_decode($data);
         foreach($temp as $t){
+            $randomid = mt_rand(100, 999);
             $input = array();
-            $input['id_krs'] = $t->id_krs;
+            $input['id_krs'] = $randomid;
             $input['fk_user'] = $t->fk_user;
             $input['fk_matkul'] = $t->fk_matkul;
             $input['tahun'] = $t->tahun;
 
             $inputs = array();
-            $inputs['fk_krs'] = $t->id_krs;
-
+            $inputs['fk_krs'] = $randomid;
             $this->db->insert('krs', $input);
             $this->db->insert('dhs', $inputs);
         }
