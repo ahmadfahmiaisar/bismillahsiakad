@@ -67,6 +67,7 @@ class Krs extends CI_Controller {
             $input['fk_matkul'] = $t->fk_matkul;
             $input['tahun'] = $t->tahun;
 
+            $inputs = array();
             $inputs['fk_krs'] = $t->id_krs;
 
             $this->db->insert('krs', $input);
