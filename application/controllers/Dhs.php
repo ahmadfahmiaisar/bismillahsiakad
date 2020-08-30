@@ -39,17 +39,6 @@ class Dhs extends CI_Controller {
         echo json_encode($query);
     }
 
-    public function insertdhs() {
-        $data = $file_get_content("php://input");
-        $temp = json_decode($data);
-        foreach($temp as $t) {
-            $input = array();
-            $input['id_dhs'] = $t->id_dhs;
-            $input['fk_krs'] = $t->fk_krs;
-            $input[]
-        }
-    }
-
     public function insertnilai($iddhs='') {
         $huruf = $_POST['huruf'];
         $huruf == "A";

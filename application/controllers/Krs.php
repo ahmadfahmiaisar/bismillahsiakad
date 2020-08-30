@@ -90,7 +90,11 @@ class Krs extends CI_Controller {
         foreach($temp as $t) {
             $input = array();
             $input['id_krs'] = $t->id_krs;
+
+            $inputs = array();
+            $inputs['fk_krs'] = $t->id_krs;
             $this->db->delete('krs', $input);
+            $this->db->delete('dhs', $inputs);
         }
         echo "okeh";
     }
