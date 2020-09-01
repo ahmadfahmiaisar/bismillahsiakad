@@ -27,6 +27,13 @@ class Dhs extends CI_Controller {
         echo json_encode($query);
     }
 
+    public function getallmatkul(){
+        $this->db->select('kode_matkul, nama_matkul');
+        $this->db->from('matkul');
+        $query['matkul'] = $this->db->get()->result_array();
+        echo json_encode($query);
+    }
+
     public function getdhsbymatkul($fk_matkul='') {
         $this->db->select('*');
         $this->db->from('dhs');

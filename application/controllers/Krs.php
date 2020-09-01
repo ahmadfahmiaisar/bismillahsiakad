@@ -61,7 +61,7 @@ class Krs extends CI_Controller {
         $data = file_get_contents("php://input");
         $temp = json_decode($data);
         foreach($temp as $t){
-            $randomid = mt_rand(100, 999);
+            $randomid = mt_rand(000, 999);
             $input = array();
             $input['id_krs'] = $randomid;
             $input['fk_user'] = $t->fk_user;
