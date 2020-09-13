@@ -28,7 +28,7 @@ class Dhs extends CI_Controller {
     }
 
     public function getallmatkul(){
-        $this->db->select('kode_matkul, nama_matkul');
+        $this->db->select('id_matkul, kode_matkul, nama_matkul');
         $this->db->from('matkul');
         $query['matkul'] = $this->db->get()->result_array();
         echo json_encode($query);
@@ -87,5 +87,7 @@ class Dhs extends CI_Controller {
         $query = array('bobot_nilai' => $bobotnilai, 'huruf' => $huruf);
         $this->db->where('id_dhs', $iddhs);
         $this->db->update('dhs', $query);
+
+        echo "okeeh";
     }
 }
