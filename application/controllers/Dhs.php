@@ -24,7 +24,7 @@ class Dhs extends CI_Controller {
         $this->db->join('matkul', 'krs.fk_matkul = matkul.id_matkul', 'inner');
         $this->db->where('username', $username);
         $query['dhs'] = $this->db->get()->result_array();
-        echo json_encode($query);
+        echo json_encode($query, JSON_NUMERIC_CHECK);
     }
 
     public function getallmatkul(){

@@ -14,7 +14,7 @@ class Krs extends CI_Controller {
         $this->db->join('user', 'krs.fk_user = user.id_user', 'inner');
         $this->db->join('kelas', 'matkul.fk_kelas = kelas.id_kelas', 'inner');
         $query['krs'] = $this->db->get()->result_array();
-        echo json_encode($query);
+        echo json_encode($query, JSON_NUMERIC_CHECK);
     }
 
 
@@ -24,6 +24,7 @@ class Krs extends CI_Controller {
         $this->db->join('user', 'krs.fk_user = user.id_user', 'inner');
         $this->db->join('matkul', 'krs.fk_matkul = matkul.id_matkul', 'inner');
         $this->db->join('kelas', 'matkul.fk_kelas = kelas.id_kelas', 'inner');
+        $this->db->join('dosen', 'matkul.fk_dosen = dosen.id_dosen');
         $this->db->where('username', $username);
         $query['krs'] = $this->db->get()->result_array();
         echo json_encode($query);

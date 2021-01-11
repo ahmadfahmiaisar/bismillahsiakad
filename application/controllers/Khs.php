@@ -20,6 +20,6 @@ class Khs extends CI_Controller {
         $this->db->where('semester', $semester);
 
         $query['khs'] = $this->db->get()->result_array();
-        echo json_encode($query);
+        echo json_encode($query, JSON_NUMERIC_CHECK);
     }
 }
