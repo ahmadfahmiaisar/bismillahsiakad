@@ -10,10 +10,10 @@ class Khs extends CI_Controller {
         $username = $_POST['username'];
         $semester = $_POST['semester'];
 
-        $dhs = array('username' => $username, 'semester' => $semester);
+        // $dhs = array('username' => $username, 'semester' => $semester);
         $this->db->select('*');
         $this->db->from('dhs');
-        $this->db->join('Krs', 'dhs.fk_krs = krs.id_krs', 'inner');
+        $this->db->join('krs', 'dhs.fk_krs = krs.id_krs', 'inner');
         $this->db->join('user', 'krs.fk_user = user.id_user', 'inner');
         $this->db->join('matkul', 'krs.fk_matkul = matkul.id_matkul', 'inner');
         $this->db->where('username', $username);
