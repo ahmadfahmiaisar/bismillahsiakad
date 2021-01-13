@@ -99,4 +99,15 @@ class Krs extends CI_Controller {
         }
         echo "okeh";
     }
+
+    public function poststatuskrs() {
+        $idkrs = $_POST['idkrs'];
+        $status = $_POST['status'];
+        
+        $query = array('status' => $status);
+        $this->db->where('id_krs', $idkrs);
+        $this->db->update('krs', $query);
+
+        echo "okeh";
+    }
 }
